@@ -1,0 +1,8 @@
+.tableclass {
+  border-collapse: collapse;
+  margin: auto;
+}
+.tableclass th,
+td {
+  border: 1px solid black;
+}
