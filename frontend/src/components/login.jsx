@@ -29,7 +29,7 @@ export function Login() {
         password: form.password,
       });
       if (resdata.status === 200) {
-        login(resdata.data.data);
+        login(resdata.data);
         navigate("/dashboard");
       }
     } catch (error) {
