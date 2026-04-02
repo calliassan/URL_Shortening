@@ -9,7 +9,12 @@ async function register({ name, password, email }) {
     throw new Error("user already exists");
   }
 
-  const userobject = new usermodel({ name, password: hashedpassword, email });
+  const userobject = new usermodel({
+    name,
+    password: hashedpassword,
+    email,
+    role: "user",
+  });
   try {
     const saveduser = await userobject.save();
     return saveduser;
@@ -41,9 +46,13 @@ async function login({ email, password }) {
     if (!matchpassword) {
       throw new Error("credentials do not match");
     }
-    const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      process.env.SECRET_KEY,
+      {
+        expiresIn: "1h",
+      },
+    );
     const userobject = user.toObject();
     delete userobject.password;
     return { user: userobject, token }; //here as we know jwt is stateless, we always attach user along with token.

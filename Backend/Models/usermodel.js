@@ -22,6 +22,11 @@ const userSchema = new mongoose.Schema({
     minlength: 1,
     maxlength: 100,
   },
+  role: {
+    type: String,
+    enum: ["admin", "user", "viewer"],
+    default: "user",
+  },
 });
 const usermodel = mongoose.model("newusermodel", userSchema);
 module.exports = usermodel;

@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../serviceapi/api";
+import { useContext } from "react";
+import { Authcontext } from "../context/contextapi";
 
 export function Login() {
   const navigate = useNavigate();
+  const { login } = useContext(Authcontext);
 
   const [form, setForm] = useState({
     email: "",
@@ -26,7 +29,7 @@ export function Login() {
         password: form.password,
       });
       if (resdata.status === 200) {
-        localStorage.setItem("token", resdata.data.data.token);
+        login(resdata.data.data);
         navigate("/dashboard");
       }
     } catch (error) {
