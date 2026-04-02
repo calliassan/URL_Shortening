@@ -11,6 +11,8 @@ async function userAuthorization(req, res, next) {
     return res.status(401).json({ message: "Bearer name is not found" });
   }
   const token = Authorization.split(" ")[1];
+  console.log("RAW HEADER:", Authorization);
+  console.log("TOKEN:", token);
   if (!token) {
     return res.status(401).json({ message: "No token" });
   }
