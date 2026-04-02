@@ -7,7 +7,7 @@ export function Dashboard() {
   const [Errors, setErrors] = useState("");
   const getdashboard = async () => {
     try {
-      const getdata = await api.get("user/dashboard");
+      const getdata = await api.get("dashboard");
       setdatas(getdata.data.data);
     } catch (error) {
       if (error.response) {
