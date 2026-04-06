@@ -5,7 +5,7 @@ async function shortenUrlservice({ userId, originalUrl }) {
   const shortUrl = await generateShortCode();
 
   const urlobject = new urlmodel({
-    userId,
+    userId: new mongoose.Types.ObjectId(userId),
     originalUrl,
     shortUrl,
   });
