@@ -4,7 +4,9 @@ async function dashboardService({ userId, role }) {
   let urls;
   try {
     if (role === "admin") {
-      urls = await urlmodel.find({ userId }).sort({ createdAt: -1 });
+      urls = await urlmodel
+        .find({ userId: new mongoose.Types.ObjectId(userId) })
+        .sort({ createdAt: -1 });
       return urls;
     } else {
       urls = await urlmodel.find({ userId: userId });
