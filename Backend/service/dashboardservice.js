@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const urlmodel = require("../Models/urlmodel");
 
 async function dashboardService({ userId, role }) {
