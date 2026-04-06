@@ -1,8 +1,12 @@
 import { useState } from "react";
 import api from "../serviceapi/api";
 import { useEffect } from "react";
+import { Authcontext } from "../context/contextapi";
+import { useContext } from "react";
 
 export function Dashboard() {
+  const { auth } = useContext(Authcontext);
+
   const [getdatas, setdatas] = useState([]);
   const [Errors, setErrors] = useState("");
   const getdashboard = async () => {
@@ -16,11 +20,13 @@ export function Dashboard() {
     }
   };
   useEffect(() => {
-    getdashboard();
-  }, []);
+    if (auth?.token) {
+      getdashboard();
+    }
+  }, [auth]);
   return (
     <>
-      {Errors && <p style={{ color: "red" }}>Errors</p>}
+      {Errors && <p style={{ color: "red" }}>{Errors}</p>}
       {getdatas.map((datas) => (
         <div key={datas._id} className="tableclass">
           <table>

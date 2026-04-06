@@ -7,7 +7,7 @@ async function dashboardController(req, res) {
       role: req.user.role,
     });
     res.status(200).json({
-      totalUrls: urls.length,
+      totalUrls: urls?.length || 0,
       data: urls,
       message: "got urls successfully",
     });
